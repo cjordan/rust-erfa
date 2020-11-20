@@ -1,0 +1,6 @@
+# erfa-sys is provided as a workspace member so that an "erfa" crate can sit
+# here one day, providing Rust functions utilising Rust types to interact with
+# the C ERFA functions.
+
+[workspace]
+members = ["erfa-sys"]
