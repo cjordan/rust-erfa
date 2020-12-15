@@ -7,4 +7,6 @@ Provide Rust bindings to the ERFA C library.
  */
 
 #![allow(non_snake_case)]
+#![allow(clippy::approx_constant)]
+#![allow(clippy::excessive_precision)]
 include!("erfa.rs");

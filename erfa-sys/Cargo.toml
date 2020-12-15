@@ -1,6 +1,6 @@
 [package]
 name = "erfa-sys"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2018"
 authors = ["Christopher H. Jordan <christopherjordan87@gmail.com>"]
 license = "MPL-2.0"
