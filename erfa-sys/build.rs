@@ -62,10 +62,20 @@ fn main() {
             );
         }
 
+        // Translate rustc optimisation levels to things a C compiler can
+        // understand. I don't know if all C compilers agree here, but it should
+        // at least work for gcc.
+        let opt_level: String = match std::env::var("OPT_LEVEL").as_ref().map(|o| o.as_str()) {
+            Err(_) => panic!("Something wrong with OPT_LEVEL"),
+            // gcc doesn't handle 'z'. Just set it to 's', which also optimises
+            // for size.
+            Ok("z") => "s",
+            Ok(o) => o
+        }.to_string();
         let dst = autotools::Config::new(erfa_project_dir)
-            .disable_static()
+            .disable_shared()
             .cflag("-Wall")
-            .cflag(format!("-O{}", std::env::var("OPT_LEVEL").unwrap()))
+            .cflag(format!("-O{}", opt_level))
             .build();
 
         println!("cargo:rustc-link-search=native={}/lib", dst.display());
