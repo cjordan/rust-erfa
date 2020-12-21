@@ -1,6 +1,6 @@
 # `erfa-sys`
 
-[![docs](https://docs.rs/rust-erfa/badge.svg)](https://docs.rs/crate/erfa-sys)
+[![docs](https://docs.rs/erfa-sys/badge.svg)](https://docs.rs/crate/erfa-sys)
 
 This crate provides direct bindings to the
 [ERFA](https://github.com/liberfa/erfa) C library. It is possible to build the
@@ -17,13 +17,13 @@ feature when building `erfa-sys`; this compiles the bundled ERFA source code
 using your own C compiler.
 
 The second way to link ERFA statically is by providing a `liberfa.a` library.
-Either the ERFA_STATIC or PKG_CONFIG_ALL_STATIC environment variable need to be
-set to 1. The directory containing this file (or the `liberfa.so` file) can be
-specified with `ERFA_LIB`. If `ERFA_LIB` isn't found, then `pkg-config` is used
-to search for the library.
+Either the `ERFA_STATIC` or `PKG_CONFIG_ALL_STATIC` environment variable need to
+be set to 1. The directory containing this file (or the `liberfa.so` file) can
+be specified with `ERFA_LIB`. If `ERFA_LIB` isn't found, then `pkg-config` is
+used to search for the library.
 
 ## Updating the provided ERFA source code
-The `erfa-sys/ext` directory contains the contents of an ERFA release tarball
+The `ext` directory contains the contents of an ERFA release tarball
 provided by [GitHub](https://github.com/liberfa/erfa/releases). If the source
 code needs to be changed, then the existing contents should be replaced with
 another tarball's contents. If the library version has changed, then attempting
