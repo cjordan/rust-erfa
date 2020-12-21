@@ -76,6 +76,7 @@ fn main() {
             .disable_shared()
             .cflag("-Wall")
             .cflag(format!("-O{}", opt_level))
+            .cflag("-fPIE")
             .build();
 
         println!("cargo:rustc-link-search=native={}/lib", dst.display());
