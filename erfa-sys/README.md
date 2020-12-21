@@ -1,5 +1,7 @@
 # `erfa-sys`
 
+[![docs](https://docs.rs/rust-erfa/badge.svg)](https://docs.rs/crate/erfa-sys)
+
 This crate provides direct bindings to the
 [ERFA](https://github.com/liberfa/erfa) C library. It is possible to build the
 library from C sources, such that the user's system does not need the ERFA C
@@ -11,8 +13,8 @@ this is that you don't need the ERFA library available as a system library at
 runtime.
 
 Static linking can be done in two ways. The first is by using the `static`
-feature when building `erfa-sys`; this compiles `erfa-src` using your own C
-compiler.
+feature when building `erfa-sys`; this compiles the bundled ERFA source code
+using your own C compiler.
 
 The second way to link ERFA statically is by providing a `liberfa.a` library.
 Either the ERFA_STATIC or PKG_CONFIG_ALL_STATIC environment variable need to be

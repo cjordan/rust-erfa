@@ -1,6 +1,6 @@
 [package]
 name = "erfa-sys"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2018"
 authors = ["Christopher H. Jordan <christopherjordan87@gmail.com>"]
 license = "MPL-2.0"
@@ -18,6 +18,10 @@ autotools = { version = "0", optional = true }
 
 [dev-dependencies]
 criterion = "0.3.*"
+
+[package.metadata.docs.rs]
+features = ["static"]
+targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin"]
 
 [[bench]]
 name = "bench"
