@@ -13,14 +13,13 @@ links = "erfa"
 static = ["autotools"]
 
 [build-dependencies]
-pkg-config = "0.3.*"
-autotools = { version = "0", optional = true }
+pkg-config = "0.3.7"
+autotools = { version = "0.2.5", optional = true }
 
 [dev-dependencies]
-criterion = "0.3.*"
+criterion = "0.3.0"
 
 [package.metadata.docs.rs]
-features = ["static"]
 targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin"]
 
 [[bench]]
