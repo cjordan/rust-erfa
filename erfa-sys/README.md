@@ -1,6 +1,11 @@
 # `erfa-sys`
 
-[![docs](https://docs.rs/erfa-sys/badge.svg)](https://docs.rs/crate/erfa-sys)
+<div class="bg-gray-dark" style="background-color:#24292e">
+<a href="https://crates.io/crates/erfa-sys">
+  <img src="https://img.shields.io/crates/v/erfa-sys?logo=rust" alt="crates.io"></a>
+<a href="https://docs.rs/crate/erfa-sys">
+  <img src="https://img.shields.io/docsrs/erfa-sys?logo=rust" alt="docs.rs"></a>
+<img src="https://img.shields.io/github/workflow/status/cjordan/rust-erfa/Cross-platform%20tests?label=Cross-platform%20tests&logo=github" alt="Cross-platform%20tests">
 
 This crate provides direct bindings to the
 [ERFA](https://github.com/liberfa/erfa) C library. It is possible to build the
@@ -30,9 +35,9 @@ then the git submodule can use a different commit.
 If new ERFA functions or constants are introduced, then `gen_rust_include.sh`
 should also be run.
 
-## MacOS and/or Windows
-I don't have access to these systems, so I don't know how they would work here.
-Pull requests welcome.
+## Windows
+I don't know how to run/bind to ERFA on Windows, so this crate may not work
+there. Pull requests welcome.
 
 ## Acknowledgement
 This crate was made with a lot of help and inspiration from the

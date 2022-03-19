@@ -1,0 +1,50 @@
+---
+name: Cross-platform tests
+
+# Do this on every push, but don't double up on tags
+on:
+  push:
+    tags-ignore:
+      - '**'
+    pull_request:
+    branches:
+    - '**'
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+
+jobs:
+  test:
+    name: Test ${{ matrix.os }}
+    runs-on: ${{matrix.os}}-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, macos]
+
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        submodules: true
+
+    - name: Install stable toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        override: true
+
+    - name: Install Cargo Make
+      uses: davidB/rust-cargo-make@v1
+
+    - name: Install Dependencies
+      run: cargo make install_deps
+
+    - name: Run tests
+      run: cargo test --all
+
+    - name: Run tests with static feature
+      run: cargo test --all --features static
