@@ -53,13 +53,21 @@ fn main() {
 
     #[cfg(feature = "static")]
     {
-        // Change this directory if the source code is updated.
-        let erfa_project_dir = std::path::PathBuf::from("ext/erfa-1.7.1");
+        let erfa_project_dir = std::path::PathBuf::from("ext/erfa");
         if !erfa_project_dir.exists() {
             panic!(
                 "Expected to find ERFA source directory {}",
                 erfa_project_dir.display()
             );
+        }
+        // Make sure the ERFA source directory isn't empty.
+        match std::fs::read_dir(&erfa_project_dir) {
+            Ok(mut d) => {
+                if let None = d.next() {
+                    panic!("ERFA source directory ext/erfa is empty!");
+                }
+            }
+            _ => panic!("Could not read from ERFA source directory ext/erfa !"),
         }
 
         // Translate rustc optimisation levels to things a C compiler can
@@ -70,8 +78,16 @@ fn main() {
             // gcc doesn't handle 'z'. Just set it to 's', which also optimises
             // for size.
             Ok("z") => "s",
-            Ok(o) => o
-        }.to_string();
+            Ok(o) => o,
+        }
+        .to_string();
+
+        // bootstrap.sh needs to be run to produce a configure script.
+        std::process::Command::new("./bootstrap.sh")
+            .current_dir(&erfa_project_dir)
+            .output()
+            .expect("failed to execute autoconf");
+
         let dst = autotools::Config::new(erfa_project_dir)
             .disable_shared()
             .cflag("-Wall")

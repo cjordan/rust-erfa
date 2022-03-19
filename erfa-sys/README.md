@@ -23,13 +23,9 @@ be specified with `ERFA_LIB`. If `ERFA_LIB` isn't found, then `pkg-config` is
 used to search for the library.
 
 ## Updating the provided ERFA source code
-The `ext` directory contains the contents of an ERFA release tarball
-provided by [GitHub](https://github.com/liberfa/erfa/releases). If the source
-code needs to be changed, then the existing contents should be replaced with
-another tarball's contents. If the library version has changed, then attempting
-to build `erfa-sys` (with e.g. `cargo build`) should fail; the directory name
-will need to be changed in `erfa-sys/build.rs` (the error message from the build
-is right next to what needs to be changed).
+The `ext` directory contains a git submodule of the [ERFA
+repo](https://github.com/liberfa/erfa). If the source code needs to be changed,
+then the git submodule can use a different commit.
 
 If new ERFA functions or constants are introduced, then `gen_rust_include.sh`
 should also be run.
