@@ -88,11 +88,24 @@ fn main() {
             .output()
             .expect("failed to execute autoconf");
 
+        // Run "autoupdate".
+        std::process::Command::new("autoupdate")
+            .current_dir(&erfa_project_dir)
+            .output()
+            .expect("failed to execute autoupdate");
+
+        // Run "autoconf" to make a configure script.
+        std::process::Command::new("autoconf")
+            .current_dir(&erfa_project_dir)
+            .output()
+            .expect("failed to execute autoconf");
+
         let dst = autotools::Config::new(erfa_project_dir)
             .disable_shared()
             .cflag("-Wall")
             .cflag(format!("-O{}", opt_level))
             .cflag("-fPIE")
+            .insource(true)
             .build();
 
         println!("cargo:rustc-link-search=native={}/lib", dst.display());
