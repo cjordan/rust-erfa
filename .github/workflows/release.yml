@@ -1,0 +1,59 @@
+---
+name: Release
+
+# Do this on every push with a version tag
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  publish-crate:
+    name: Publish to crates.io
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+
+      - name: Check semver with erfa-sys
+        uses: obi1kenobi/cargo-semver-checks-action@v1
+        with:
+          crate-name: erfa-sys
+
+      # - name: Check semver with erfa
+      #   uses: obi1kenobi/cargo-semver-checks-action@v1
+      #   with:
+      #     crate-name: erfa
+
+      - name: Cargo publish erfa-sys
+        continue-on-error: true
+        run: |
+          sudo apt install -y liberfa-dev
+          cd erfa-sys
+          cargo publish --token ${CARGO_REGISTRY_TOKEN}
+          cd ..
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+      - name: Cargo publish erfa
+        continue-on-error: true
+        run: |
+          cd erfa
+          cargo publish --token ${CARGO_REGISTRY_TOKEN}
+          cd ..
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}

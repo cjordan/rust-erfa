@@ -1,0 +1,24 @@
+[package]
+name = "erfa"
+version = "0.2.1"
+edition = "2021"
+authors = ["Christopher H. Jordan <christopherjordan87@gmail.com>"]
+license = "MPL-2.0"
+description = "A pure-Rust equivalent to the ERFA C library."
+repository = "https://github.com/cjordan/rust-erfa"
+homepage = "https://github.com/cjordan/rust-erfa"
+
+[dependencies]
+thiserror = "1.0.0"
+
+[dev-dependencies]
+approx = "0.5.0"
+criterion = "0.4.0"
+# Compile statically so that any machine-dependent optimisations are disabled.
+# These can slightly change the results.
+# https://users.rust-lang.org/t/subtle-floating-point-differences-between-c-library-and-its-rust-re-write/82355
+erfa-sys = { path = "../erfa-sys", features = ["static"] }
+
+[[bench]]
+name = "bench"
+harness = false
