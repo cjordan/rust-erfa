@@ -34,10 +34,10 @@ jobs:
         with:
           crate-name: erfa-sys
 
-      # - name: Check semver with erfa
-      #   uses: obi1kenobi/cargo-semver-checks-action@v1
-      #   with:
-      #     crate-name: erfa
+      - name: Check semver with erfa
+        uses: obi1kenobi/cargo-semver-checks-action@v1
+        with:
+          crate-name: erfa
 
       - name: Cargo publish erfa-sys
         continue-on-error: true
